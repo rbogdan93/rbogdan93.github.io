@@ -26,7 +26,7 @@ var lookupTable = [
 	"F5",
 	"Gb5",
 	"G5"
-]
+];
 
 var notes = [];
 
@@ -40,7 +40,7 @@ var state;
 
 function playSound(soundObj) {
   var sound = $("#audio")[0];
-  sound.src = soundObj + ".mp3"
+  sound.src = soundObj + ".mp3";
   sound.play();
 }
 
@@ -57,13 +57,13 @@ var stillPlaying = false;
 
 function startPlaying() {
 	stillPlaying = true;
-	$("#play")[0].value = "Stop";
+	$("#play")[0].value = "\u25FC";
 	setTimeout(function() { playNotes(0); }, 1);
 }
 
 function stopPlaying() {
 	stillPlaying = false;
-	$("#play")[0].value = "Play";
+	$("#play")[0].value = "\u25BA";
 	$('.slider').css('background-color', 'white');
 	stopSound();
 }
@@ -76,7 +76,8 @@ function playNotes(index) {
 		}
 		var currentNote = notes[index];
 		setTimeout(function() { playNotes(index + 1); }, 250);
-		$("#note" + (index + 1).toString()).css('background-color', 'red');
+		// $("#note" + (index + 1).toString()).css('background-color', 'red');
+		$("#note" + (index + 1).toString()).effect('bounce', {times:2}, 250);
 
 		if (currentNote == "sustain") {
 
@@ -99,7 +100,7 @@ $(document).ready(function() {
     		var changedNote = ui.value;
     		notes[sliderID - 1] = lookupTable[changedNote];
     		console.log(notes);
-    	}, 
+    	},
     	start: function(event, ui) {
     		var handle = $(this).find('.ui-slider-handle');
     		handle.css('background-color', 'red');
@@ -115,7 +116,14 @@ $(document).ready(function() {
     	},
     	stop: function(event, ui) {
     		var handle = $(this).find('.ui-slider-handle');
+    		var sliderID = this.id.match(/\d+/);
+    		var changedNote = ui.value;
     		handle.css('background-color', 'white');
+    		if (! (lookupTable[changedNote] == 'none' || lookupTable[changedNote] == 'sustain')) {
+    			playSound(lookupTable[changedNote]);
+    			setTimeout(function() { stopSound(); }, 250);
+    		}
+    		
     	},
         orientation: "vertical",
         step: 1,
