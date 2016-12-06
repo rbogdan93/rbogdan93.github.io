@@ -29,14 +29,13 @@ var lookupTable = [
 ];
 
 var notes = [];
+var stillPlaying = false;
 
 function initializeNotes() {
 	for (var i = 0; i < 16; ++i) {
 		notes[i] = lookupTable[0];
 	}
 }
-
-var state;
 
 function playSound(soundObj) {
   var sound = $("#audio")[0];
@@ -52,8 +51,6 @@ function stopSound() {
 	  sound.currentTime = 0;
 	}
 }
-
-var stillPlaying = false;
 
 function startPlaying() {
 	stillPlaying = true;
