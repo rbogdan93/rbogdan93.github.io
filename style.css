@@ -1,0 +1,14 @@
+table {
+  border-collapse: separate;
+  border-spacing: 50px 0;
+}
+
+td {
+  padding: 10px 0;
+}
+
+.slider .ui-slider-handle {
+	background-color: white;
+	text-align: center;
+	width: 2.5em;
+}
