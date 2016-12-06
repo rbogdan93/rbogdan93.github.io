@@ -99,7 +99,6 @@ $(document).ready(function() {
     		var sliderID = this.id.match(/\d+/);
     		var changedNote = ui.value;
     		notes[sliderID - 1] = lookupTable[changedNote];
-    		console.log(notes);
     	},
     	start: function(event, ui) {
     		var handle = $(this).find('.ui-slider-handle');
